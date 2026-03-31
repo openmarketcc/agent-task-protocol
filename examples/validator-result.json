@@ -1,0 +1,16 @@
+{
+  "overall_passed": true,
+  "validator_version": "1.0",
+  "checks": [
+    {
+      "type": "range_check",
+      "passed": true,
+      "detail": "Field 'risk_level' returned 'high'. Allowed values: low, medium, high, critical"
+    },
+    {
+      "type": "array_not_empty",
+      "passed": true,
+      "detail": "Field 'recommendations' must be a non-empty array"
+    }
+  ]
+}

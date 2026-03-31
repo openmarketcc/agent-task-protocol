@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttaskprotocol.org/schemas/validator-result.schema.json",
+  "title": "ValidatorResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["overall_passed", "checks"],
+  "properties": {
+    "overall_passed": { "type": "boolean" },
+    "validator_version": { "type": "string" },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "passed", "detail"],
+        "properties": {
+          "type": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}

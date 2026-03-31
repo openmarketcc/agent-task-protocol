@@ -1,0 +1,20 @@
+{
+  "task": {
+    "id": "task_demo_invalid",
+    "version": "2.0",
+    "created_at": "not-a-timestamp",
+    "status": "pending"
+  },
+  "parties": {},
+  "task_definition": {
+    "domain": "legal",
+    "task_type": "analysis",
+    "title": "Broken task",
+    "description": "Missing required structure"
+  },
+  "constraints": {
+    "max_cost_usd": -1,
+    "timeout_ms": 0
+  },
+  "acceptance_criteria": []
+}

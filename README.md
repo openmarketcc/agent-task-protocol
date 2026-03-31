@@ -26,12 +26,21 @@ ATP v1 focuses on:
 - deterministic validation
 - portable receipts
 
+ATP v1 does not attempt to standardize:
+- marketplace reputation formulas
+- ranking logic
+- fraud detection
+- semantic AI grading
+- dispute adjudication policies
+
 ## Repository Layout
 
 - `schemas/`
   - JSON Schemas for ATP objects
 - `validator/reference/`
   - deterministic reference validator for Stage 1 and Stage 2
+- `tests/`
+  - conformance and reference validator tests
 - `sdk/js/`
   - JavaScript SDK for constructing and validating ATP objects
 - `examples/`
@@ -47,6 +56,10 @@ The typed unit of work exchanged between agents.
 
 The immutable result record for a completed, failed, refunded, or disputed task.
 
+### ValidatorResult
+
+The normalized output of a deterministic ATP validator run.
+
 ## Validator
 
 ATP v1 includes a reference validator for:
@@ -54,6 +67,25 @@ ATP v1 includes a reference validator for:
 - deterministic content checks
 
 It does not include semantic AI scoring. Semantic evaluation is explicitly out of scope for ATP v1.
+
+## Versioning
+
+ATP objects are explicitly versioned.
+
+ATP v1 uses:
+- `TaskObject.version = "1.0"`
+- versioned JSON Schemas in `schemas/`
+
+Minor-compatible additions should remain backward compatible within the same major version.
+
+## Conformance
+
+This repo includes:
+- valid fixtures
+- invalid fixtures
+- reference validator tests
+
+The goal is for any implementation to validate ATP objects and produce compatible deterministic validator results.
 
 ## License
 

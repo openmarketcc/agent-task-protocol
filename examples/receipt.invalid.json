@@ -1,0 +1,7 @@
+{
+  "receipt_id": "receipt_invalid",
+  "task_id": "task_demo_invalid",
+  "status": "success-ish",
+  "overall_passed": "yes",
+  "created_at": "not-a-timestamp"
+}
