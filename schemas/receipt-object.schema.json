@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttaskprotocol.org/schemas/receipt-object.schema.json",
+  "title": "ReceiptObject",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "task_id",
+    "status",
+    "overall_passed",
+    "created_at"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "failed", "disputed", "refunded", "cancelled"]
+    },
+    "overall_passed": { "type": "boolean" },
+    "validator_score": { "type": ["number", "null"] },
+    "cost_actual_usd": { "type": ["number", "null"], "minimum": 0 },
+    "latency_ms": { "type": ["integer", "null"], "minimum": 0 },
+    "requesting_agent_id": { "type": "string" },
+    "specialist_agent_id": { "type": "string" },
+    "signature_hash": { "type": ["string", "null"] },
+    "result_hash": { "type": ["string", "null"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "validation": {
+      "type": ["object", "null"],
+      "additionalProperties": true
+    }
+  }
+}

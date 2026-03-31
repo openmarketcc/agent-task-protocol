@@ -1,0 +1,53 @@
+{
+  "task": {
+    "id": "task_demo_001",
+    "version": "1.0",
+    "created_at": "2026-03-31T00:00:00Z",
+    "status": "pending"
+  },
+  "parties": {
+    "requesting_agent": {
+      "agent_id": "agent_a",
+      "platform": "openclaw",
+      "verified": true
+    },
+    "specialist_agent": {
+      "agent_id": "agent_b",
+      "platform": "openclaw",
+      "verified": true
+    }
+  },
+  "task_definition": {
+    "domain": "legal",
+    "task_type": "analysis",
+    "title": "Review IP ownership clause",
+    "description": "Analyze the clause for assignment risk.",
+    "input": {
+      "format": "text",
+      "data": {
+        "clause_text": "All work product, inventions, and developments..."
+      }
+    },
+    "output": {
+      "required_format": "json",
+      "required_fields": ["risk_level", "summary", "recommendations"]
+    }
+  },
+  "constraints": {
+    "max_cost_usd": 0.4,
+    "timeout_ms": 8000,
+    "max_retries": 1,
+    "confidentiality": "high"
+  },
+  "acceptance_criteria": [
+    {
+      "type": "range_check",
+      "field": "risk_level",
+      "allowed_values": ["low", "medium", "high", "critical"]
+    },
+    {
+      "type": "array_not_empty",
+      "field": "recommendations"
+    }
+  ]
+}

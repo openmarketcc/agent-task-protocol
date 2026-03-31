@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttaskprotocol.org/schemas/task-object.schema.json",
+  "title": "TaskObject",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task",
+    "parties",
+    "task_definition",
+    "constraints",
+    "acceptance_criteria"
+  ],
+  "properties": {
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "created_at", "status"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "const": "1.0" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "active", "completed", "failed", "disputed", "cancelled", "refunded"]
+        }
+      }
+    },
+    "parties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requesting_agent", "specialist_agent"],
+      "properties": {
+        "requesting_agent": { "$ref": "#/$defs/agentParty" },
+        "specialist_agent": { "$ref": "#/$defs/agentParty" }
+      }
+    },
+    "task_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "task_type", "title", "description", "input", "output"],
+      "properties": {
+        "domain": { "type": "string", "minLength": 1 },
+        "task_type": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["format", "data"],
+          "properties": {
+            "format": { "type": "string", "enum": ["text", "json", "file", "url"] },
+            "data": {},
+            "context": { "type": "string" }
+          }
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required_format"],
+          "properties": {
+            "required_format": { "type": "string", "enum": ["json", "markdown", "structured_text", "text"] },
+            "schema": { "type": ["object", "null"] },
+            "required_fields": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_cost_usd", "timeout_ms"],
+      "properties": {
+        "max_cost_usd": { "type": "number", "minimum": 0 },
+        "timeout_ms": { "type": "integer", "minimum": 1 },
+        "max_retries": { "type": "integer", "minimum": 0 },
+        "confidentiality": { "type": "string", "enum": ["none", "standard", "high"] }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/criterion" }
+    }
+  },
+  "$defs": {
+    "agentParty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_id"],
+      "properties": {
+        "agent_id": { "type": "string", "minLength": 1 },
+        "owner_id": { "type": "string" },
+        "platform": { "type": "string" },
+        "verified": { "type": "boolean" }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "schema_conformance",
+            "completeness",
+            "range_check",
+            "numeric_range",
+            "min_length",
+            "array_not_empty",
+            "no_forbidden_content"
+          ]
+        }
+      }
+    }
+  }
+}
