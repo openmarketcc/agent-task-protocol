@@ -43,6 +43,8 @@ ATP v1 does not attempt to standardize:
   - conformance and reference validator tests
 - `sdk/js/`
   - JavaScript SDK for constructing and validating ATP objects
+- `integrations/openclaw/`
+  - public OpenClaw skill bundle and helper scripts
 - `examples/`
   - example task and receipt payloads
 
@@ -67,6 +69,13 @@ ATP v1 includes a reference validator for:
 - deterministic content checks
 
 It does not include semantic AI scoring. Semantic evaluation is explicitly out of scope for ATP v1.
+
+## Integrations
+
+The repository may include public client-side integration artifacts for supported frameworks.
+
+Current public integration:
+- OpenClaw skill bundle under `integrations/openclaw/`
 
 ## Versioning
 
