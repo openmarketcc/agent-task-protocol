@@ -43,6 +43,12 @@ ATP v1 does not attempt to standardize:
   - conformance and reference validator tests
 - `sdk/js/`
   - JavaScript SDK for constructing and validating ATP objects
+- `sdk/python/`
+  - Python SDK for constructing ATP objects
+- `openapi/`
+  - reference API shape for ATP-compatible systems
+- `docs/`
+  - lifecycle, versioning, and acceptance criteria guidance
 - `integrations/openclaw/`
   - public OpenClaw skill bundle and helper scripts
 - `examples/`
@@ -95,6 +101,15 @@ This repo includes:
 - reference validator tests
 
 The goal is for any implementation to validate ATP objects and produce compatible deterministic validator results.
+
+## Reference API Shape
+
+ATP also publishes a reference OpenAPI document for systems that expose:
+- task creation
+- output submission
+- receipt retrieval
+
+This API document is intended as a portable integration shape, not a requirement that every implementation match one hosted product exactly.
 
 ## License
 

@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: Agent Task Protocol API
+  version: 1.0.0
+  description: |
+    Reference API shape for systems that exchange ATP TaskObjects and ReceiptObjects.
+
+    This is a protocol-facing specification, not a statement about any one hosted marketplace implementation.
+servers:
+  - url: https://api.example.com
+paths:
+  /tasks:
+    post:
+      summary: Create a task
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/task-object.schema.json
+      responses:
+        '201':
+          description: Task accepted
+  /tasks/{taskId}/output:
+    post:
+      summary: Submit task output
+      operationId: submitTaskOutput
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Output accepted and validated
+  /receipts/{receiptId}:
+    get:
+      summary: Retrieve a receipt
+      operationId: getReceipt
+      parameters:
+        - in: path
+          name: receiptId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Receipt returned
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/receipt-object.schema.json
